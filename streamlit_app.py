@@ -26,7 +26,7 @@ sns.scatterplot(data, x='Perioden', y='TotaleBevolking_1', ax=ax, label='Total P
 
 # Conditionally add male population to the plot
 if show_male_population:
-    sns.scatterplot(data=df, x='Perioden', y='Mannen_2', ax=ax, label='Male Population')
+    sns.scatterplot(data, x='Perioden', y='Mannen_2', ax=ax, label='Male Population')
 
 # Add labels
 ax.set_title('Amsterdam Population Over Time')
