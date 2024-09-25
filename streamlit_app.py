@@ -34,7 +34,7 @@ ax.set_ylabel('Population')
 ax.set_xlabel('Year')
 
 # Set y-axis limit to include 0
-ax.set_ylim(0, df['Population'].max() + 50000)
+ax.set_ylim(0, data['TotaleBevolking_1'].max() + 50000)
 
 # Modify x-axis ticks: rotate and set font size
 plt.xticks(fontsize=10, rotation=45)
