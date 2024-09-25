@@ -66,19 +66,19 @@ st.subheader("Migration Data")
 # Dropdown menu to select between immigration and emigration
 migration_type = st.selectbox(
     "Select Change Type:",
-    options=["Vestiging Gemeente", "Vertrek Gemeente", "Immigratie", "Emigratie", "Geboren", "Overleden"]
+    options=["Vestiging", "Vertrek", "Immigratie", "Emigratie", "Geboren", "Overleden"]
 )
 
 # Create the second plot
 fig2, ax2 = plt.subplots()
 
 # Plot immigration or emigration based on the dropdown selection
-if migration_type == "Vestiging Gemeente":
+if migration_type == "Vestiging":
     sns.barplot(data=data, x='Perioden', y='VestigingUitAndereGemeente_69', ax=ax2)
-    ax2.set_title('Amsterdam Vestiging in gemeente Over Time')
-elif migration_type == "Vertrek Gemeente":
+    ax2.set_title('Amsterdam Vestiging Over Time')
+elif migration_type == "Vertrek":
     sns.barplot(data=data, x='Perioden', y='VertrekNaarAndereGemeente_70', ax=ax2)
-    ax2.set_title('Amsterdam vertrek gemeente Over Time')
+    ax2.set_title('Amsterdam vertrek Over Time')
 elif migration_type == "Immigratie":
     sns.barplot(data=data, x='Perioden', y='Immigratie_74', ax=ax2)
     ax2.set_title('Amsterdam immigratie Over Time')
