@@ -11,6 +11,7 @@ def load_data():
                                           select=['Perioden','TotaleBevolking_1','Mannen_2',
                                                   'Vrouwen_3','VestigingUitAndereGemeente_69', 
                                                   'VertrekNaarAndereGemeente_70', ]))
+    return data
 
 st.title("🎈 My new app")
 st.write(
