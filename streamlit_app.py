@@ -4,16 +4,20 @@ import cbsodata
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+@st.cache_data
+def load_data():
+    data = pd.DataFrame(cbsodata.get_data('70072ned', 
+                                          filters="RegioS eq 'GM0363'", 
+                                          select=['Perioden','TotaleBevolking_1','Mannen_2',
+                                                  'Vrouwen_3','VestigingUitAndereGemeente_69', 
+                                                  'VertrekNaarAndereGemeente_70', ]))
+
 st.title("🎈 My new app")
 st.write(
     "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
 )
 
-data = pd.DataFrame(
-        cbsodata.get_data('70072ned',
-                          filters="RegioS eq 'GM0363'",
-                          select=['Perioden','TotaleBevolking_1','Mannen_2','Vrouwen_3','VestigingUitAndereGemeente_69', 'VertrekNaarAndereGemeente_70', 
-                                 ]))
+data = load_data()
 print(data.head(20))
 
 # Title for the app
