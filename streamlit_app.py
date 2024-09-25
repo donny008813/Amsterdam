@@ -24,7 +24,7 @@ show_male_population = st.checkbox("Show Male Population")
 fig, ax = plt.subplots()
 
 # Plot total population
-sns.scatterplot(data, x='Perioden', y='TotaleBevolking_1', ax=ax, label='Total Population')
+st.line_chart(data, x='Perioden', y='TotaleBevolking_1')
 
 # Conditionally add male population to the plot
 if show_male_population:
