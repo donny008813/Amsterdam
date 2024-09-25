@@ -10,7 +10,8 @@ def load_data():
                                           filters="RegioS eq 'GM0363'", 
                                           select=['Perioden','TotaleBevolking_1','Mannen_2',
                                                   'Vrouwen_3','VestigingUitAndereGemeente_69', 
-                                                  'VertrekNaarAndereGemeente_70', ]))
+                                                  'VertrekNaarAndereGemeente_70', 'Immigratie_74', 'Emmigratie_75',
+                                                 'LevendGeborenKinderen_58', 'Overledenen_60']))
     return data
 
 st.title("🎈 My new app")
@@ -64,8 +65,8 @@ st.subheader("Migration Data")
 
 # Dropdown menu to select between immigration and emigration
 migration_type = st.selectbox(
-    "Select Migration Type:",
-    options=["Vestiging Gemeente", "Vertrek Gemeente"]
+    "Select Change Type:",
+    options=["Vestiging Gemeente", "Vertrek Gemeente", "Immigratie", "Emigratie", "Geboren", "Overleden"]
 )
 
 # Create the second plot
@@ -74,10 +75,22 @@ fig2, ax2 = plt.subplots()
 # Plot immigration or emigration based on the dropdown selection
 if migration_type == "Vestiging Gemeente":
     sns.barplot(data=data, x='Perioden', y='VestigingUitAndereGemeente_69', ax=ax2)
-    ax2.set_title('Amsterdam Immigration Over Time')
-else:
+    ax2.set_title('Amsterdam Vestiging in gemeente Over Time')
+elif migration_type == "Vertrek Gemeente":
     sns.barplot(data=data, x='Perioden', y='VertrekNaarAndereGemeente_70', ax=ax2)
-    ax2.set_title('Amsterdam Emigration Over Time')
+    ax2.set_title('Amsterdam vertrek gemeente Over Time')
+elif migration_type == "Immigratie":
+    sns.barplot(data=data, x='Perioden', y='Immigratie_74', ax=ax2)
+    ax2.set_title('Amsterdam immigratie Over Time')
+elif migration_type == "Emigratie":
+    sns.barplot(data=data, x='Perioden', y='Emigratie_75', ax=ax2)
+    ax2.set_title('Amsterdam emigratie Over Time')
+elif migration_tyep == "Geboren":
+    sns.barplot(data=data, x='Perioden', y='LevendGeborenKinderen_58', ax=ax2)
+    ax2.set_title('Amsterdam geboren Over Time')
+else:
+    sns.barplot(data=data, x='Perioden', y='Overledenen_60', ax=ax2)
+    ax2.set_title('Amsterdam overledenen Over Time')
 
 # Add labels
 ax2.set_ylabel('Number of People')
