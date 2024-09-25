@@ -27,6 +27,7 @@ st.title("Amsterdam Population and Migration Data")
 # First scatter plot: Population
 st.subheader("Population Data")
 show_male_population = st.checkbox("Show Male Population")
+show_female_population = st.checkbox("Show Female Population")
 
 # Create the first plot for population
 fig1, ax1 = plt.subplots()
@@ -36,7 +37,10 @@ sns.scatterplot(data=data, x='Perioden', y='TotaleBevolking_1', ax=ax1, label='T
 
 # Conditionally add male population to the plot
 if show_male_population:
-    sns.scatterplot(data=df, x='Perioden', y='Mannen_2', ax=ax1, label='Male Population')
+    sns.scatterplot(data=data, x='Perioden', y='Mannen_2', ax=ax1, label='Male Population')
+
+if show_female_population:
+    sns.scatterplot(data=data, x='Perioden', y='Vrouwen_3', ax=ax1, label='Female Population')
 
 # Add labels and title
 ax1.set_title('Amsterdam Population Over Time')
