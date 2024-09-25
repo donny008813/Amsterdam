@@ -20,9 +20,6 @@ print(data.head(20))
 st.subheader("Population Data")
 show_male_population = st.checkbox("Show Male Population")
 
-# Scatter plot with Seaborn
-fig, ax = plt.subplots()
-
 # Plot total population
 st.line_chart(data, x='Perioden', y='TotaleBevolking_1')
 
