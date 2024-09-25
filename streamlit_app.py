@@ -15,6 +15,7 @@ data = pd.DataFrame(
                           select=['Perioden','TotaleBevolking_1','Mannen_2','Vrouwen_3']))
 print(data.head(20))
 
-scatter = sns.scatterplot(data, x = 'Perioden', y = 'TotaleBevolking_1')
+fig = plt.figure(figsize=(10,20))
+sns.scatterplot(data, x = 'Perioden', y = 'TotaleBevolking_1')
 
-st.pyplot(scatter)
+st.pyplot(fig)
