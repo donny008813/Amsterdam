@@ -33,5 +33,11 @@ ax.set_title('Amsterdam Population Over Time')
 ax.set_ylabel('Population')
 ax.set_xlabel('Year')
 
+# Set y-axis limit to include 0
+ax.set_ylim(0, df['Population'].max() + 50000)
+
+# Modify x-axis ticks: rotate and set font size
+plt.xticks(fontsize=10, rotation=45)
+
 # Show the plot in the Streamlit app
 st.pyplot(fig)
