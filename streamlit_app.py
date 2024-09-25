@@ -56,22 +56,7 @@ migration_type = st.selectbox(
     options=["Vestiging Gemeente", "Vertrek Gemeente"]
 )
 
-# Plot immigration or emigration based on the dropdown selection
-fig2, ax2 = plt.subplots()
-
 if migration_type == "Vestiging Gemeente":
-    sns.barplot(data, x='Perioden', y='VestigingUitAndereGemeente_69', ax=ax2)
-    ax2.set_title('Amsterdam vestiging uit andere gemeente Over Time')
+    st.scatter_chart(data, x='Perioden', y='VestigingUitAndereGemeente_69')
 else:
-    sns.barplot(data, x='Perioden', y='VertrekNaarAndereGemeente_70', ax=ax2)
-    ax2.set_title('Amsterdam vertrek uit gemeente Over Time')
-
-# Add labels
-ax2.set_ylabel('Number of People')
-ax2.set_xlabel('Year')
-
-# Modify x-axis ticks: rotate and set font size
-plt.xticks(fontsize=10, rotation=45)
-
-# Show the second plot in the Streamlit app
-st.pyplot(fig2)
+    st.scatter_chart(data, x='Perioden', y='VertrekNaarAndereGemeente_70')
