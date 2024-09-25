@@ -12,10 +12,12 @@ st.write(
 data = pd.DataFrame(
         cbsodata.get_data('70072ned',
                           filters="RegioS eq 'GM0363'",
-                          select=['Perioden','TotaleBevolking_1','Mannen_2','Vrouwen_3']))
+                          select=['Perioden','TotaleBevolking_1','Mannen_2','Vrouwen_3','VestigingUitAndereGemeente_69', 'VertrekNaarAndereGemeente_70', 
+                                 ]))
 print(data.head(20))
 
 # Checkbox to toggle male population
+st.subheader("Population Data")
 show_male_population = st.checkbox("Show Male Population")
 
 # Scatter plot with Seaborn
@@ -44,3 +46,32 @@ plt.xticks(fontsize=10, rotation=45)
 
 # Show the plot in the Streamlit app
 st.pyplot(fig)
+
+# Second plot: Immigration and Emigration Data
+st.subheader("Migration Data")
+
+# Dropdown menu to select between immigration and emigration
+migration_type = st.selectbox(
+    "Select change Type:",
+    options=["Vestiging Gemeente", "Vertrek Gemeente"]
+)
+
+# Plot immigration or emigration based on the dropdown selection
+fig2, ax2 = plt.subplots()
+
+if migration_type == "Vestiging Gemeente":
+    sns.barplot(data, x='Perioden', y='VestigingUitAndereGemeente_69', ax=ax2)
+    ax2.set_title('Amsterdam vestiging uit andere gemeente Over Time')
+else:
+    sns.barplot(data, x='Perioden', y='VertrekNaarAndereGemeente_70', ax=ax2)
+    ax2.set_title('Amsterdam vertrek uit gemeente Over Time')
+
+# Add labels
+ax2.set_ylabel('Number of People')
+ax2.set_xlabel('Year')
+
+# Modify x-axis ticks: rotate and set font size
+plt.xticks(fontsize=10, rotation=45)
+
+# Show the second plot in the Streamlit app
+st.pyplot(fig2)
