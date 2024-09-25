@@ -10,7 +10,7 @@ def load_data():
                                           filters="RegioS eq 'GM0363'", 
                                           select=['Perioden','TotaleBevolking_1','Mannen_2',
                                                   'Vrouwen_3','VestigingUitAndereGemeente_69', 
-                                                  'VertrekNaarAndereGemeente_70', 'Immigratie_74', 'Emmigratie_75',
+                                                  'VertrekNaarAndereGemeente_70', 'Immigratie_74', 'Emigratie_75',
                                                  'LevendGeborenKinderen_58', 'Overledenen_60']))
     return data
 
