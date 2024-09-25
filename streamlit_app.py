@@ -39,10 +39,10 @@ ax1.set_ylabel('Population')
 ax1.set_xlabel('Year')
 
 # Set y-axis limit to include 0
-ax1.set_ylim(0, data['Population'].max() + 50000)
+ax1.set_ylim(0, data['TotaleBevolking_1'].max() + 50000)
 
 # Show only every 2nd x-axis tick
-ax1.set_xticks(data['Year'][::2])
+ax1.set_xticks(data['Perioden'][::2])
 
 # Modify x-axis ticks: rotate and set font size
 plt.xticks(fontsize=10, rotation=45)
