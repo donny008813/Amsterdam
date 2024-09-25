@@ -85,7 +85,7 @@ elif migration_type == "Immigratie":
 elif migration_type == "Emigratie":
     sns.barplot(data=data, x='Perioden', y='Emigratie_75', ax=ax2)
     ax2.set_title('Amsterdam emigratie Over Time')
-elif migration_tyep == "Geboren":
+elif migration_type == "Geboren":
     sns.barplot(data=data, x='Perioden', y='LevendGeborenKinderen_58', ax=ax2)
     ax2.set_title('Amsterdam geboren Over Time')
 else:
