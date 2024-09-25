@@ -15,7 +15,23 @@ data = pd.DataFrame(
                           select=['Perioden','TotaleBevolking_1','Mannen_2','Vrouwen_3']))
 print(data.head(20))
 
-fig = plt.figure(figsize=(20,10))
-sns.scatterplot(data, x = 'Perioden', y = 'TotaleBevolking_1')
+# Checkbox to toggle male population
+show_male_population = st.checkbox("Show Male Population")
 
+# Scatter plot with Seaborn
+fig, ax = plt.subplots()
+
+# Plot total population
+sns.scatterplot(data, x='Perioden', y='TotaleBevolking_1', ax=ax, label='Total Population')
+
+# Conditionally add male population to the plot
+if show_male_population:
+    sns.scatterplot(data=df, x='Perioden', y='Mannen_2', ax=ax, label='Male Population')
+
+# Add labels
+ax.set_title('Amsterdam Population Over Time')
+ax.set_ylabel('Population')
+ax.set_xlabel('Year')
+
+# Show the plot in the Streamlit app
 st.pyplot(fig)
