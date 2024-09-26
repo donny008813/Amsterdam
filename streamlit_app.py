@@ -173,10 +173,11 @@ ax5.set_xlabel('Werkloosheid')
 ax5.set_ylabel('Populatie')
 st.pyplot(fig5)
 
+st.write('Zoals in de bovenste grafiek te zien is, die van de totaal aantal banen. Lijkt er een lineair verband te zijn met de totale populatie. Met de tweede grafiek lijkt dit niet zo te zijn. Dus wordt alleen het totaal aantal banen meegenomen in het opstellen van het model.')
 
 #######
 # 2. Perform Multiple Linear Regression if the relationships appear linear
-st.subheader("Multiple Linear Regression: Total Jobs and Joblessness Predicting Population")
+st.subheader("Toepassen lineaire regressie: voorspellen van de totale populatie met het totale aantal banen.")
 
 # Alleen gevulde data selecteren
 data_gevuld = data[~data['TotaalBanen_111'].isna()]
@@ -194,7 +195,7 @@ coefficients = model.coef_
 intercept = model.intercept_
 
 # Display the regression equation
-st.write(f"Regression Equation: Population = {coefficients[0]:.2f} * Total Jobs + {intercept:.2f}")
+st.write(f"Regressie vergelijking: Populatie = {coefficients[0]:.2f} * Total aantal banen + {intercept:.2f}")
 
 # Predict population values using the model
 y_pred = model.predict(X)
@@ -204,11 +205,11 @@ data_gevuld['Population_Predicted'] = y_pred
 
 # 3. Visualize the actual vs predicted population
 fig6, ax6 = plt.subplots()
-sns.scatterplot(data=data_gevuld, x='Perioden', y='TotaleBevolking_1', ax=ax6, label='Actual Population', color='blue')
-sns.lineplot(data=data_gevuld, x='Perioden', y='Population_Predicted', ax=ax6, label='Predicted Population', color='red')
-ax3.set_title('Actual vs Predicted Population Over Time')
-ax3.set_xlabel('Year')
-ax3.set_ylabel('Population')
+sns.scatterplot(data=data_gevuld, x='Perioden', y='TotaleBevolking_1', ax=ax6, label='Werkelijke populatie', color='blue')
+sns.lineplot(data=data_gevuld, x='Perioden', y='Population_Predicted', ax=ax6, label='Voorspelde Populatie', color='red')
+ax3.set_title('Werkelijke tegen voorspelde Populatie over de tijd')
+ax3.set_xlabel('Jaar')
+ax3.set_ylabel('Populatie')
 st.pyplot(fig6)
 
 # Show R-squared value
