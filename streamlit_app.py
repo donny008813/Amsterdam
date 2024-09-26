@@ -62,7 +62,7 @@ st.pyplot(fig1)
 
 # Second plot: Immigration and Emigration Data
 st.subheader("Inkomende en vertrekkende bewoners")
-st.write('De verschillende aantallen inkomende of vertrekkende bewoners van Amsterdam. Selecteer in de dropdown menu welke vorm van inkomend of uitgaand getoond wordt.")
+st.write('De verschillende aantallen inkomende of vertrekkende bewoners van Amsterdam. Selecteer in de dropdown menu welke vorm van inkomend of uitgaand getoond wordt.')
 
 # Dropdown menu to select between immigration and emigration
 migration_type = st.selectbox(
