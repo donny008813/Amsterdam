@@ -163,7 +163,7 @@ show_line = st.checkbox('Toon regressielijn')
 fig4, ax4 = plt.subplots()
 sns.scatterplot(data=data, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax4, color='blue', label="Totaal aantal banen tegen populatie")
 if show_line:
-    sns.regplot(data=data, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax4, scatter=False, color='red', label="Regression Line")
+    sns.regplot(data=data, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax4, scatter=False, color='red', label="Regression Line", ci=None)
 
 # Voeg titel en labels toe
 ax4.set_title('Totaal aantal banen tegenover totale populatie')
@@ -176,7 +176,7 @@ st.pyplot(fig4)
 fig5, ax5 = plt.subplots()
 sns.scatterplot(data=data, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax5, color='green', label="Werkloosheid tegen populatie")
 if show_line:
-    sns.regplot(data=data, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax5, scatter=False, color='red', label="Regression Line")
+    sns.regplot(data=data, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax5, scatter=False, color='red', label="Regression Line", ci=None)
 
 # Voeg titel en labels toe 
 ax5.set_title('Werkloosheid tegenover totale populatie')
