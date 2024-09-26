@@ -55,7 +55,7 @@ ax1.set_ylim(0, data['TotaleBevolking_1'].max() + 50000)
 plt.xticks(fontsize=10, rotation=45)
 
 # Show only every 2nd x-axis tick
-ax2.set_xticks(data['Perioden'][::2])
+ax1.set_xticks(data['Perioden'][::2])
 
 # Show the first plot in the Streamlit app
 st.pyplot(fig1)
