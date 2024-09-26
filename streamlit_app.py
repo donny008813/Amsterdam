@@ -3,6 +3,8 @@ import pandas as pd
 import cbsodata
 import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+import numpy as np
 
 @st.cache_data
 def load_data():
@@ -145,6 +147,7 @@ plt.xticks(rotation=90)  # Adjust the rotation angle as needed
 # Show the third plot in the Streamlit app
 st.pyplot(fig3)
 
+#######
 # Lineair model opstellen
 st.subheader('Het voorspellen van de populatie van Amsterdam')
 st.write('Is het mogelijk om de populatie van Amsterdam te voorspellen aan de hand van andere variabelen zoals hierboven getoond. Deze variabelen geven direct aan of er mensen vertrekken of bijkomen. Er zijn meer gegevens beschikbaar over Amsterdam. Een van deze variabelen waar we eerst onderzoek naar doen is werkloosheid en aantal banen. Er zal gekeken worden ofdeze variabelen de populatie van Amsterdam kunnen voorspellen.')
@@ -169,3 +172,42 @@ ax5.set_title('Werkloosheid tegenover totale populatie')
 ax5.set_xlabel('Werkloosheid')
 ax5.set_ylabel('Populatie')
 st.pyplot(fig5)
+
+
+#######
+# 2. Perform Multiple Linear Regression if the relationships appear linear
+st.subheader("Multiple Linear Regression: Total Jobs and Joblessness Predicting Population")
+
+# Prepare the predictor variables (Total Jobs and Joblessness) and response variable (Population)
+X = data[['TotaalBanen_111']]  # Predictor variables
+y = data['TotaleBevolking_1']  # Response variable
+
+# Create and fit the linear regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Get the regression coefficients and intercept
+coefficients = model.coef_
+intercept = model.intercept_
+
+# Display the regression equation
+st.write(f"Regression Equation: Population = {coefficients[0]:.2f} * Total Jobs + {coefficients[1]:.2f} * Joblessness + {intercept:.2f}")
+
+# Predict population values using the model
+y_pred = model.predict(X)
+
+# Add the predicted population values to the DataFrame for plotting
+data['Population_Predicted'] = y_pred
+
+# 3. Visualize the actual vs predicted population
+fig6, ax6 = plt.subplots()
+sns.scatterplot(data=data, x='Perioden', y='TotaleBevolking_1', ax=ax6, label='Actual Population', color='blue')
+sns.lineplot(data=data, x='Perioden', y='Population_Predicted', ax=ax6, label='Predicted Population', color='red')
+ax3.set_title('Actual vs Predicted Population Over Time')
+ax3.set_xlabel('Year')
+ax3.set_ylabel('Population')
+st.pyplot(fig6)
+
+# Show R-squared value
+r_squared = model.score(X, y)
+st.write(f"R-squared: {r_squared:.4f}")
