@@ -24,9 +24,10 @@ data = load_data()
 # Titel en inleidende tekst voor de app
 st.title("Voorspellen van de populatie van Amsterdam")
 st.write("De woningcrisis is een actueel probleem. Alleen om erachter te komen hoeveel woningen er nodig zijn in Amsterdam, moet er een beeld zijn hoeveel inwoners erbij zullen komen en er weggaan.")
+st.write("Er zijn nog meer problemen te bedenken die voort komen uit de toename van de populatie. Is dit aantal te beinvloeden? Hier zal naar gekeken worden'.)
 st.write("Eerst zal er worden gekeken naar de totale populatie van Amsterdam en verdeeld over mannen en vrouwen. Daarna naar hoeveel er bij zijn gekomen en hoeveel er weg zijn gegaan.")
 st.write("Daarna zal er gekeken worden of er aan de hand van andere gegevens over de jaren heen een lineair regressie model opgesteld kan worden waarmee de populatie voorspeld zou kunnen worden.")
-st.write("De gekozen variabelen worden verklaard en het model wordt getoond.")
+st.write("De gekozen variabelen worden verklaard en het model zal worden getoond.")
 
 # Eerste scatter plot: Populatie
 st.subheader("Populatie Data")
@@ -56,7 +57,7 @@ ax1.set_xlabel('Jaar')
 ax1.set_ylim(0, data['TotaleBevolking_1'].max() + 50000)
 
 # x-as labels draaien
-plt.xticks(rotation=90)
+plt.xticks(fontsize=10, rotation=90)
 
 # Plot de eerste plot
 st.pyplot(fig1)
@@ -156,21 +157,33 @@ st.write('Om een lineair model op te stellen moet er eerst gekeken worden of dez
 
 st.subheader("Check Lineariteit: Voorspellende variabelen tegen populatie")
 
+show_line = st.checkbox('Toon regressielijn')
+
 # Twee scatterplots om te kijken of de totale populatie lineair afhankelijk lijkt voor het totaal aantal banen en werkloosheid
 fig4, ax4 = plt.subplots()
 sns.scatterplot(data=data, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax4, color='blue', label="Total Jobs vs Population")
-sns.regplot(data=data, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax4, scatter=False, color='red', label="Regression Line")
+if show_line:
+    sns.regplot(data=data, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax4, scatter=False, color='red', label="Regression Line")
+
+# Voeg titel en labels toe
 ax4.set_title('Totaal aantal banen tegenover totale populatie')
 ax4.set_xlabel('Totaal aantal banen')
 ax4.set_ylabel('Populatie')
+
+# Plot de vierde plot
 st.pyplot(fig4)
 
 fig5, ax5 = plt.subplots()
 sns.scatterplot(data=data, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax5, color='green', label="Joblessness vs Population")
-sns.regplot(data=data, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax5, scatter=False, color='red', label="Regression Line")
+if show_line:
+    sns.regplot(data=data, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax5, scatter=False, color='red', label="Regression Line")
+
+# Voeg titel en labels toe 
 ax5.set_title('Werkloosheid tegenover totale populatie')
 ax5.set_xlabel('Werkloosheid')
 ax5.set_ylabel('Populatie')
+
+# Plot de vijfde plot
 st.pyplot(fig5)
 
 st.write('Zoals in de bovenste grafiek te zien is, die van de totaal aantal banen. Lijkt er een lineair verband te zijn met de totale populatie. Met de tweede grafiek lijkt dit niet zo te zijn. Dus wordt alleen het totaal aantal banen meegenomen in het opstellen van het model.')
@@ -195,7 +208,9 @@ coefficients = model.coef_
 intercept = model.intercept_
 
 # Toon de vergelijking
-st.write(f"Regressie vergelijking: Populatie = {coefficients[0]:.2f} * Total aantal banen + {intercept:.2f}")
+st.write(f"Regressie vergelijking: Populatie = {coefficients[0]:.2f} * Total aantal banen + {intercept:.2f}, Dit is de vergelijking die het model geeft")
+st.write("Als het aantal banen groter wordt zal het aantal inwoners met 750 toenemen per baan.")
+st.write("Hieronder is de grafiek te zien waarin de werkelijke populatie getoond wordt en de voorspelde populatie aan de hand van het model.")
 
 # Voorspel de waardes
 y_pred = model.predict(X)
