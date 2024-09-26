@@ -63,7 +63,7 @@ st.write('De verschillende aantallen inkomende of vertrekkende bewoners van Amst
 
 # Dropdown menu to select between immigration and emigration
 migration_type = st.selectbox(
-    "Select Change Type:",
+    "Selecteer type ingaand of vertrekend:",
     options=["Vestiging", "Vertrek", "Immigratie", "Emigratie", "Geboren", "Overleden"]
 )
 
@@ -122,7 +122,7 @@ data['Perioden'] = data['Perioden'].astype('int')
 # Slider maken voor de net grafiek
 min_year = int(data['Perioden'].min())
 max_year = int(data['Perioden'].max())
-year_range = st.slider('Select year range for net inkomende populatie', min_year, max_year, (min_year, max_year))
+year_range = st.slider('Select het aantal jaren voor de inkomende of vertrekende populatie', min_year, max_year, (min_year, max_year))
 
 # Data selecter op basis van de slider
 data_slider = data[(data['Perioden'] >= year_range[0]) & (data['Perioden'] <= year_range[1])]
