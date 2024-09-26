@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 import numpy as np
 
+# Inladen van de data met behulp van een fuctie en cache_data zodat deze geladen blijft
 @st.cache_data
 def load_data():
     data = pd.DataFrame(cbsodata.get_data('70072ned', 
@@ -16,63 +17,64 @@ def load_data():
                                                  'LevendGeborenKinderen_58', 'Overledenen_60', 'TotaalBanen_111', 'Werkloosheid_154']))
     return data
 
+# Laad de data
 data = load_data()
-print(data.head(20))
 
-# Title for the app
+
+# Titel en inleidende tekst voor de app
 st.title("Voorspellen van de populatie van Amsterdam")
 st.write("De woningcrisis is een actueel probleem. Alleen om erachter te komen hoeveel woningen er nodig zijn in Amsterdam, moet er een beeld zijn hoeveel inwoners erbij zullen komen en er weggaan.")
 st.write("Eerst zal er worden gekeken naar de totale populatie van Amsterdam en verdeeld over mannen en vrouwen. Daarna naar hoeveel er bij zijn gekomen en hoeveel er weg zijn gegaan.")
 st.write("Daarna zal er gekeken worden of er aan de hand van andere gegevens over de jaren heen een lineair regressie model opgesteld kan worden waarmee de populatie voorspeld zou kunnen worden.")
 st.write("De gekozen variabelen worden verklaard en het model wordt getoond.")
 
-# First scatter plot: Population
+# Eerste scatter plot: Populatie
 st.subheader("Populatie Data")
 st.write('Populatie van Amsterdam over de jaren.')
 show_male_population = st.checkbox("Toon mannelijke populatie")
 show_female_population = st.checkbox("Toon vrouwelijke populatie")
 
-# Create the first plot for population
+# Maak de eerste plot
 fig1, ax1 = plt.subplots()
 
-# Plot total population
+# Plot de totale populatie
 sns.scatterplot(data=data, x='Perioden', y='TotaleBevolking_1', ax=ax1, label='Totale Populatie')
 
-# Conditionally add male population to the plot
+# If statements voor de checkbox
 if show_male_population:
     sns.scatterplot(data=data, x='Perioden', y='Mannen_2', ax=ax1, label='Mannelijke Populatie')
 
 if show_female_population:
     sns.scatterplot(data=data, x='Perioden', y='Vrouwen_3', ax=ax1, label='Vrouwelijke Populatie')
 
-# Add labels and title
+# Labels en titel
 ax1.set_title('Populatie van Amsterdam over de jaren')
 ax1.set_ylabel('Populatie')
 ax1.set_xlabel('Jaar')
 
-# Set y-axis limit to include 0
+# Voeg nul toe aan de y-as
 ax1.set_ylim(0, data['TotaleBevolking_1'].max() + 50000)
 
-# Modify x-axis ticks: rotate and set font size
+# x-as labels draaien
 plt.xticks(rotation=90)
 
-# Show the first plot in the Streamlit app
+# Plot de eerste plot
 st.pyplot(fig1)
 
-# Second plot: Immigration and Emigration Data
+# Tweede plot inkomende en vertrekkende bewoners
 st.subheader("Inkomende en vertrekkende bewoners")
 st.write('De verschillende aantallen inkomende of vertrekkende bewoners van Amsterdam. Selecteer in de dropdown menu welke vorm van inkomend of uitgaand getoond wordt.')
 
-# Dropdown menu to select between immigration and emigration
+# Dropdown menu om soort te selecteren
 migration_type = st.selectbox(
     "Selecteer type ingaand of vertrekend:",
     options=["Vestiging", "Vertrek", "Immigratie", "Emigratie", "Geboren", "Overleden"]
 )
 
-# Create the second plot
+# Maak de tweede plot
 fig2, ax2 = plt.subplots()
 
-# Plot immigration or emigration based on the dropdown selection
+# Plot de soort op basis van de checkbox
 if migration_type == "Vestiging":
     sns.barplot(data=data, x='Perioden', y='VestigingUitAndereGemeente_69', ax=ax2)
     ax2.set_title('Amsterdam vestiging over de jaren')
@@ -92,30 +94,30 @@ else:
     sns.barplot(data=data, x='Perioden', y='Overledenen_60', ax=ax2)
     ax2.set_title('Amsterdam overledenen over de jaren')
 
-# Add labels
+# Labels
 ax2.set_ylabel('Aantal mensen')
 ax2.set_xlabel('Jaar')
 
-# Modify x-axis ticks: rotate and set font size
+# x-as labels draaien en formaat
 plt.xticks(fontsize=10, rotation=45)
 
-# Show only every 2nd x-axis tick
+# x-as toon elk tweede jaar
 ax2.set_xticks(data['Perioden'][::2])
 
-# Show the second plot in the Streamlit app
+# Plot de tweede plot
 st.pyplot(fig2)
 
 # Derde grafiek
 st.subheader('Totaal inkomend of vertrekende populatie Amsterdam')
 st.write('Toont het totaal van de inkomende en uitgaande bewoners van Amsterdam. Hierin zijn de uitgaande en ingaande cijfers dus samengenomen om te tonen hoeveel mensen er per jaar afgaan of bijkomen.')
 
-# Calculate inkomend
+# Bereken inkomend
 data['inkomend'] = data['VestigingUitAndereGemeente_69'] + data['Immigratie_74'] + data['LevendGeborenKinderen_58']
 
-# Calculate uitgaand
+# Bereken uitgaand
 data['uitgaand'] = data['VertrekNaarAndereGemeente_70'] + data['Emigratie_75'] + data['Overledenen_60']
 
-# Calculate net populatie
+# Bereken net populatie
 data['net populatie'] = data['inkomend'] - data['uitgaand']
 
 # Jaartal naar int veranderen voor de slider
@@ -135,28 +137,26 @@ fig3, ax3 = plt.subplots()
 # Plot de net grafiek als barplot
 sns.barplot(data=data_slider, x='Perioden', y='net populatie', ax=ax3)
 
-# Add title and labels
+# Voeg titel en labels toe
 ax3.set_title('Amsterdam totaal inkomend of vertrekende populatie')
 ax3.set_ylabel('Aantal mensen')
 ax3.set_xlabel('Jaar')
 
-
-# Rotate the x-ticks for better readability
+# x-as draaien
 plt.xticks(rotation=90)  # Adjust the rotation angle as needed
 
-# Show the third plot in the Streamlit app
+# Plot de derde plot
 st.pyplot(fig3)
 
 #######
-# Lineair model opstellen
+# Lineairiteit controleren
 st.subheader('Het voorspellen van de populatie van Amsterdam')
 st.write('Is het mogelijk om de populatie van Amsterdam te voorspellen aan de hand van andere variabelen zoals hierboven getoond. Deze variabelen geven direct aan of er mensen vertrekken of bijkomen. Er zijn meer gegevens beschikbaar over Amsterdam. Een van deze variabelen waar we eerst onderzoek naar doen is werkloosheid en aantal banen. Er zal gekeken worden ofdeze variabelen de populatie van Amsterdam kunnen voorspellen.')
 st.write('Om een lineair model op te stellen moet er eerst gekeken worden of deze variabelen lineair afhankelijk zijn met de totale populatie.')
 
-# 1. Visualize the relationships to check linearity assumptions
 st.subheader("Check Lineariteit: Voorspellende variabelen tegen populatie")
 
-# Create two scatter plots to check the linear relationship between predictors and the population
+# Twee scatterplots om te kijken of de totale populatie lineair afhankelijk lijkt voor het totaal aantal banen en werkloosheid
 fig4, ax4 = plt.subplots()
 sns.scatterplot(data=data, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax4, color='blue', label="Total Jobs vs Population")
 sns.regplot(data=data, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax4, scatter=False, color='red', label="Regression Line")
@@ -176,34 +176,34 @@ st.pyplot(fig5)
 st.write('Zoals in de bovenste grafiek te zien is, die van de totaal aantal banen. Lijkt er een lineair verband te zijn met de totale populatie. Met de tweede grafiek lijkt dit niet zo te zijn. Dus wordt alleen het totaal aantal banen meegenomen in het opstellen van het model.')
 
 #######
-# 2. Perform Multiple Linear Regression if the relationships appear linear
+# Lineair model opstellen
 st.subheader("Toepassen lineaire regressie: voorspellen van de totale populatie met het totale aantal banen.")
 
 # Alleen gevulde data selecteren
 data_gevuld = data[~data['TotaalBanen_111'].isna()]
 
-# Prepare the predictor variables (Total Jobs and Joblessness) and response variable (Population)
+# Bepaal de voorspellende en afhankelijke variabelen
 X = data_gevuld[['TotaalBanen_111']]  # Predictor variables
 y = data_gevuld['TotaleBevolking_1']  # Response variable
 
-# Create and fit the linear regression model
+# Maak en pas het model toe
 model = LinearRegression()
 model.fit(X, y)
 
-# Get the regression coefficients and intercept
+# Verkrijg de waardes van de vergelijking
 coefficients = model.coef_
 intercept = model.intercept_
 
-# Display the regression equation
+# Toon de vergelijking
 st.write(f"Regressie vergelijking: Populatie = {coefficients[0]:.2f} * Total aantal banen + {intercept:.2f}")
 
-# Predict population values using the model
+# Voorspel de waardes
 y_pred = model.predict(X)
 
-# Add the predicted population values to the DataFrame for plotting
+# Voeg waardes toe om te kunnen plotten
 data_gevuld['Population_Predicted'] = y_pred
 
-# 3. Visualize the actual vs predicted population
+# Plot de voorspelde waarden tegenover de werkelijke waarden
 fig6, ax6 = plt.subplots()
 sns.scatterplot(data=data_gevuld, x='Perioden', y='TotaleBevolking_1', ax=ax6, label='Werkelijke populatie', color='blue')
 sns.lineplot(data=data_gevuld, x='Perioden', y='Population_Predicted', ax=ax6, label='Voorspelde Populatie', color='red')
@@ -212,7 +212,7 @@ ax6.set_xlabel('Jaar')
 ax6.set_ylabel('Populatie')
 st.pyplot(fig6)
 
-# Show R-squared value
+# Toon de R-squared waarde
 r_squared = model.score(X, y)
 st.write(f"R-squared: {r_squared:.4f}, dit is het voorspellend vermogen van het model. Dit percentage van de variantie wordt opgevangen door het model. Het aantal banen lijkt dus een goede voorspeller te zijn voor het bepalen van de totale populatie van Amsterdam.")
 st.write('Het bepalen van de totale populatie kan dus gedaan worden met het aantal banen. Maar er zullen ook nog mogelijk andere variabelen zijn die hier invloed op kunnen hebben. Hier kan nog verder onderzoek naar gedaan worden. En er kan dan mogelijk een nieuw model opgesteld worden, die mogelijk beter de populatie kan voorspelen.')
