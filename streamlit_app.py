@@ -139,8 +139,5 @@ ax3.set_title('Amsterdam Net Migration Over Time')
 ax3.set_ylabel('Net Migration (Immigration - Emigration)')
 ax3.set_xlabel('Year')
 
-# Show only every 2nd x-axis tick
-ax3.set_xticks(data['Perioden'][::2])
-
 # Show the third plot in the Streamlit app
 st.pyplot(fig3)
