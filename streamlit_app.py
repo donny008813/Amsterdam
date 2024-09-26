@@ -207,9 +207,9 @@ data_gevuld['Population_Predicted'] = y_pred
 fig6, ax6 = plt.subplots()
 sns.scatterplot(data=data_gevuld, x='Perioden', y='TotaleBevolking_1', ax=ax6, label='Werkelijke populatie', color='blue')
 sns.lineplot(data=data_gevuld, x='Perioden', y='Population_Predicted', ax=ax6, label='Voorspelde Populatie', color='red')
-ax3.set_title('Werkelijke tegen voorspelde Populatie over de tijd')
-ax3.set_xlabel('Jaar')
-ax3.set_ylabel('Populatie')
+ax6.set_title('Werkelijke tegen voorspelde Populatie over de tijd')
+ax6.set_xlabel('Jaar')
+ax6.set_ylabel('Populatie')
 st.pyplot(fig6)
 
 # Show R-squared value
