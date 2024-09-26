@@ -164,7 +164,7 @@ st.pyplot(fig4)
 
 fig5, ax5 = plt.subplots()
 sns.scatterplot(data=data, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax5, color='green', label="Joblessness vs Population")
-sns.regplot(data=df, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax2, scatter=False, color='red', label="Regression Line")
+sns.regplot(data=data, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax2, scatter=False, color='red', label="Regression Line")
 ax5.set_title('Werkloosheid tegenover totale populatie')
 ax5.set_xlabel('Werkloosheid')
 ax5.set_ylabel('Populatie')
