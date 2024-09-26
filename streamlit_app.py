@@ -11,7 +11,7 @@ def load_data():
                                           select=['Perioden','TotaleBevolking_1','Mannen_2',
                                                   'Vrouwen_3','VestigingUitAndereGemeente_69', 
                                                   'VertrekNaarAndereGemeente_70', 'Immigratie_74', 'Emigratie_75',
-                                                 'LevendGeborenKinderen_58', 'Overledenen_60']))
+                                                 'LevendGeborenKinderen_58', 'Overledenen_60', 'TotaalBanen_111', 'Werkloosheid_154']))
     return data
 
 data = load_data()
@@ -144,3 +144,28 @@ plt.xticks(rotation=90)  # Adjust the rotation angle as needed
 
 # Show the third plot in the Streamlit app
 st.pyplot(fig3)
+
+# Lineair model opstellen
+st.subheader('Het voorspellen van de populatie van Amsterdam')
+st.write('Is het mogelijk om de populatie van Amsterdam te voorspellen aan de hand van andere variabelen zoals hierboven getoond. Deze variabelen geven direct aan of er mensen vertrekken of bijkomen. Er zijn meer gegevens beschikbaar over Amsterdam. Een van deze variabelen waar we eerst onderzoek naar doen is werkloosheid en aantal banen. Er zal gekeken worden ofdeze variabelen de populatie van Amsterdam kunnen voorspellen.')
+st.write('Om een lineair model op te stellen moet er eerst gekeken worden of deze variabelen lineair afhankelijk zijn met de totale populatie.')
+
+# 1. Visualize the relationships to check linearity assumptions
+st.subheader("Check Lineariteit: Voorspellende variabelen tegen populatie")
+
+# Create two scatter plots to check the linear relationship between predictors and the population
+fig4, ax4 = plt.subplots()
+sns.scatterplot(data=data, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax4, color='blue', label="Total Jobs vs Population")
+sns.regplot(data=data, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax4, scatter=False, color='red', label="Regression Line")
+ax4.set_title('Totaal aantal banen tegenover totale populatie')
+ax4.set_xlabel('Totaal aantal banen')
+ax4.set_ylabel('Populatie')
+st.pyplot(fig4)
+
+fig5, ax5 = plt.subplots()
+sns.scatterplot(data=data, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax5, color='green', label="Joblessness vs Population")
+sns.regplot(data=df, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax2, scatter=False, color='red', label="Regression Line")
+ax5.set_title('Werkloosheid tegenover totale populatie')
+ax5.set_xlabel('Werkloosheid')
+ax5.set_ylabel('Populatie')
+st.pyplot(fig5)
