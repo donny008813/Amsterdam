@@ -52,10 +52,7 @@ ax1.set_xlabel('Jaar')
 ax1.set_ylim(0, data['TotaleBevolking_1'].max() + 50000)
 
 # Modify x-axis ticks: rotate and set font size
-plt.xticks(fontsize=10, rotation=45)
-
-# Show only every 2nd x-axis tick
-ax1.set_xticks(data['Perioden'][::2])
+plt.xticks(rotation=90)
 
 # Show the first plot in the Streamlit app
 st.pyplot(fig1)
@@ -108,6 +105,7 @@ st.pyplot(fig2)
 
 # Derde grafiek
 st.subheader('Totaal inkomend of vertrekende populatie Amsterdam')
+st.write('Toont het totaal van de inkomende en uitgaande bewoners van Amsterdam. Hierin zijn de uitgaande en ingaande cijfers dus samengenomen om te tonen hoeveel mensen er per jaar afgaan of bijkomen.')
 
 # Calculate inkomend
 data['inkomend'] = data['VestigingUitAndereGemeente_69'] + data['Immigratie_74'] + data['LevendGeborenKinderen_58']
