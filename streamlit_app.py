@@ -25,8 +25,8 @@ data = load_data()
 st.title("Voorspellen van de populatie van Amsterdam")
 st.write("De woningcrisis is een actueel probleem. Alleen om erachter te komen hoeveel woningen er nodig zijn in Amsterdam, moet er een beeld zijn hoeveel inwoners erbij zullen komen en er weggaan.")
 st.write("Er zijn nog meer problemen te bedenken die voort komen uit de toename van de populatie. Is dit aantal te beinvloeden? Hier zal naar gekeken worden.")
-st.write("Eerst zal er worden gekeken naar de totale populatie van Amsterdam en verdeeld over mannen en vrouwen. Daarna naar hoeveel er bij zijn gekomen en hoeveel er weg zijn gegaan.")
-st.write("Daarna zal er gekeken worden of er aan de hand van andere gegevens over de jaren heen een lineair regressie model opgesteld kan worden waarmee de populatie voorspeld zou kunnen worden.")
+st.write("Eerst zal er worden gekeken naar de totale populatie van Amsterdam en verdeeld over mannen en vrouwen. Vervolgens wordt er gekeken naar hoeveel mensen er bij zijn gekomen en hoeveel mensen er weg zijn gegaan.")
+st.write("Tot slot zal er gekeken worden of er aan de hand van andere gegevens over de jaren heen een lineair regressie model opgesteld kan worden waarmee de populatie voorspeld zou kunnen worden.")
 st.write("De gekozen variabelen worden verklaard en het model zal worden getoond.")
 
 # Eerste scatter plot: Populatie
@@ -64,11 +64,11 @@ st.pyplot(fig1)
 
 # Tweede plot inkomende en vertrekkende bewoners
 st.subheader("Inkomende en vertrekkende bewoners")
-st.write('De verschillende aantallen inkomende of vertrekkende bewoners van Amsterdam. Selecteer in de dropdown menu welke vorm van inkomend of uitgaand getoond wordt.')
+st.write('De verschillende aantallen inkomende of vertrekkende bewoners van Amsterdam. Selecteer in het dropdown menu welke vorm van inkomend of uitgaand getoond wordt.')
 
 # Dropdown menu om soort te selecteren
 migration_type = st.selectbox(
-    "Selecteer type ingaand of vertrekend:",
+    "Selecteer type ingaand of vertrekkende:",
     options=["Vestiging", "Vertrek", "Immigratie", "Emigratie", "Geboren", "Overleden"]
 )
 
@@ -109,7 +109,7 @@ ax2.set_xticks(data['Perioden'][::2])
 st.pyplot(fig2)
 
 # Derde grafiek
-st.subheader('Totaal inkomend of vertrekende populatie Amsterdam')
+st.subheader('Totaal inkomend of vertrekkende populatie Amsterdam')
 st.write('Toont het totaal van de inkomende en uitgaande bewoners van Amsterdam. Hierin zijn de uitgaande en ingaande cijfers dus samengenomen om te tonen hoeveel mensen er per jaar afgaan of bijkomen.')
 
 # Bereken inkomend
@@ -152,8 +152,8 @@ st.pyplot(fig3)
 #######
 # Lineairiteit controleren
 st.subheader('Het voorspellen van de populatie van Amsterdam')
-st.write('Is het mogelijk om de populatie van Amsterdam te voorspellen aan de hand van andere variabelen zoals hierboven getoond. Deze variabelen geven direct aan of er mensen vertrekken of bijkomen. Er zijn meer gegevens beschikbaar over Amsterdam. Een van deze variabelen waar we eerst onderzoek naar doen is werkloosheid en aantal banen. Er zal gekeken worden ofdeze variabelen de populatie van Amsterdam kunnen voorspellen.')
-st.write('Om een lineair model op te stellen moet er eerst gekeken worden of deze variabelen lineair afhankelijk zijn met de totale populatie.')
+st.write('Is het mogelijk om de populatie van Amsterdam te voorspellen aan de hand van andere variabelen zoals hierboven getoond. Deze variabelen geven direct aan of er mensen vertrekken of bijkomen. Er zijn meer gegevens beschikbaar over Amsterdam. Een van deze variabelen waar we eerst onderzoek naar doen is werkloosheid en aantal banen. Er zal gekeken worden of deze variabelen de populatie van Amsterdam kunnen voorspellen.')
+st.write('Om een lineair model op te stellen moet er eerst gekeken worden of de totale populatie lineair afhankelijk lijkt van de variablen.')
 
 st.subheader("Check Lineariteit: Voorspellende variabelen tegen populatie")
 
@@ -186,7 +186,7 @@ ax5.set_ylabel('Populatie')
 # Plot de vijfde plot
 st.pyplot(fig5)
 
-st.write('Zoals in de bovenste grafiek te zien is, die van de totaal aantal banen. Lijkt er een lineair verband te zijn met de totale populatie. Met de tweede grafiek lijkt dit niet zo te zijn. Dus wordt alleen het totaal aantal banen meegenomen in het opstellen van het model.')
+st.write('Zoals in de bovenste grafiek te zien is, die van het totaal aantal banen. Lijkt er een lineair verband te zijn met de totale populatie. Met de tweede grafiek lijkt dit niet zo te zijn. Dus wordt alleen het totaal aantal banen meegenomen in het opstellen van het model.')
 
 #######
 # Lineair model opstellen
@@ -208,7 +208,7 @@ coefficients = model.coef_
 intercept = model.intercept_
 
 # Toon de vergelijking
-st.write(f"Regressie vergelijking: Populatie = {coefficients[0]:.2f} * Total aantal banen + {intercept:.2f}, Dit is de vergelijking die het model geeft")
+st.write(f"Regressie vergelijking: Populatie = {coefficients[0]:.2f} * Totaal aantal banen + {intercept:.2f}, dit is de vergelijking die het model geeft")
 st.write("Als het aantal banen groter wordt zal het aantal inwoners met 750 toenemen per 1000 banen.")
 st.write("Hieronder is de grafiek te zien waarin de werkelijke populatie getoond wordt en de voorspelde populatie aan de hand van het model.")
 
