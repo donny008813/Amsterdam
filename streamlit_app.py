@@ -239,12 +239,17 @@ fig7, ax7 = plt.subplots()
 sns.barplot(data=data_gevuld, x='Perioden', y='TotaalBanen_111', ax=ax7)
 
 # Voeg titel en labels toe
-ax6.set_title('Totaal aantal banen per jaar')
-ax6.set_xlabel('Jaar')
-ax6.set_ylabel('Totaal aantal banen')
+ax7.set_title('Totaal aantal banen per jaar')
+ax7.set_xlabel('Jaar')
+ax7.set_ylabel('Totaal aantal banen')
+
+# x-as labels draaien
+plt.xticks(fontsize=10, rotation=90)
 
 # Plot de zevende plot
 st.pyplot(fig7)
+
+st.write('In 2020 neemt het totaal aantal banen niet toe, zoals in de jaren ervoor en erna. Dit heeft mogelijk met Covid-19 te maken gehad. Maar dit heeft dus zoals te zien in de grafiek van het model wel invloed op het model zelf.")
 
 # Toon de R-squared waarde
 r_squared = model.score(X, y)
