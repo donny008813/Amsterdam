@@ -161,20 +161,20 @@ show_line = st.checkbox('Toon regressielijn')
 
 # Twee scatterplots om te kijken of de totale populatie lineair afhankelijk lijkt voor het totaal aantal banen en werkloosheid
 fig4, ax4 = plt.subplots()
-sns.scatterplot(data=data, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax4, color='blue', label="Total Jobs vs Population")
+sns.scatterplot(data=data, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax4, color='blue', label="Totaal aantal banen tegen populatie")
 if show_line:
     sns.regplot(data=data, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax4, scatter=False, color='red', label="Regression Line")
 
 # Voeg titel en labels toe
 ax4.set_title('Totaal aantal banen tegenover totale populatie')
-ax4.set_xlabel('Totaal aantal banen')
+ax4.set_xlabel('Totaal aantal banen (x1000)')
 ax4.set_ylabel('Populatie')
 
 # Plot de vierde plot
 st.pyplot(fig4)
 
 fig5, ax5 = plt.subplots()
-sns.scatterplot(data=data, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax5, color='green', label="Joblessness vs Population")
+sns.scatterplot(data=data, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax5, color='green', label="Werkloosheid tegen populatie")
 if show_line:
     sns.regplot(data=data, x='Werkloosheid_154', y='TotaleBevolking_1', ax=ax5, scatter=False, color='red', label="Regression Line")
 
@@ -209,7 +209,7 @@ intercept = model.intercept_
 
 # Toon de vergelijking
 st.write(f"Regressie vergelijking: Populatie = {coefficients[0]:.2f} * Total aantal banen + {intercept:.2f}, Dit is de vergelijking die het model geeft")
-st.write("Als het aantal banen groter wordt zal het aantal inwoners met 750 toenemen per baan.")
+st.write("Als het aantal banen groter wordt zal het aantal inwoners met 750 toenemen per 1000 banen.")
 st.write("Hieronder is de grafiek te zien waarin de werkelijke populatie getoond wordt en de voorspelde populatie aan de hand van het model.")
 
 # Voorspel de waardes
@@ -241,7 +241,7 @@ sns.barplot(data=data_gevuld, x='Perioden', y='TotaalBanen_111', ax=ax7)
 # Voeg titel en labels toe
 ax7.set_title('Totaal aantal banen per jaar')
 ax7.set_xlabel('Jaar')
-ax7.set_ylabel('Totaal aantal banen')
+ax7.set_ylabel('Totaal aantal banen (x1000)')
 
 # x-as labels draaien
 plt.xticks(fontsize=10, rotation=90)
@@ -249,7 +249,7 @@ plt.xticks(fontsize=10, rotation=90)
 # Plot de zevende plot
 st.pyplot(fig7)
 
-st.write("In 2020 neemt het totaal aantal banen niet toe, zoals in de jaren ervoor en erna. Dit heeft mogelijk met Covid-19 te maken gehad. Maar dit heeft dus zoals te zien in de grafiek van het model wel invloed op het model zelf.")
+st.write("In 2020 neemt het totaal aantal banen niet toe, zoals in de jaren ervoor en erna. Een soort gelijk iets was ook te zien in de grafiek van de inkomende populatie. Dit heeft mogelijk met Covid-19 te maken gehad. Maar dit heeft dus zoals te zien in de grafiek van het model wel invloed op het model zelf.")
 
 # Toon de R-squared waarde
 r_squared = model.score(X, y)
