@@ -100,7 +100,7 @@ ax2.set_ylabel('Aantal mensen')
 ax2.set_xlabel('Jaar')
 
 # x-as labels draaien en formaat
-plt.xticks(fontsize=10, rotation=45)
+plt.xticks(fontsize=10, rotation=90)
 
 # x-as toon elk tweede jaar
 ax2.set_xticks(data['Perioden'][::2])
