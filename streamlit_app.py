@@ -178,9 +178,12 @@ st.pyplot(fig5)
 # 2. Perform Multiple Linear Regression if the relationships appear linear
 st.subheader("Multiple Linear Regression: Total Jobs and Joblessness Predicting Population")
 
+# Alleen gevulde data selecteren
+data_gevuld = data[~data['TotaalBanen_111'].isna()]
+
 # Prepare the predictor variables (Total Jobs and Joblessness) and response variable (Population)
-X = data[['TotaalBanen_111']]  # Predictor variables
-y = data['TotaleBevolking_1']  # Response variable
+X = data_gevuld[['TotaalBanen_111']]  # Predictor variables
+y = data_gevuld['TotaleBevolking_1']  # Response variable
 
 # Create and fit the linear regression model
 model = LinearRegression()
@@ -197,12 +200,12 @@ st.write(f"Regression Equation: Population = {coefficients[0]:.2f} * Total Jobs 
 y_pred = model.predict(X)
 
 # Add the predicted population values to the DataFrame for plotting
-data['Population_Predicted'] = y_pred
+data_gevuld['Population_Predicted'] = y_pred
 
 # 3. Visualize the actual vs predicted population
 fig6, ax6 = plt.subplots()
-sns.scatterplot(data=data, x='Perioden', y='TotaleBevolking_1', ax=ax6, label='Actual Population', color='blue')
-sns.lineplot(data=data, x='Perioden', y='Population_Predicted', ax=ax6, label='Predicted Population', color='red')
+sns.scatterplot(data=data_gevuld, x='Perioden', y='TotaleBevolking_1', ax=ax6, label='Actual Population', color='blue')
+sns.lineplot(data=data_gevuld, x='Perioden', y='Population_Predicted', ax=ax6, label='Predicted Population', color='red')
 ax3.set_title('Actual vs Predicted Population Over Time')
 ax3.set_xlabel('Year')
 ax3.set_ylabel('Population')
