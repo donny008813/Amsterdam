@@ -222,10 +222,29 @@ data_gevuld['Population_Predicted'] = y_pred
 fig6, ax6 = plt.subplots()
 sns.scatterplot(data=data_gevuld, x='Perioden', y='TotaleBevolking_1', ax=ax6, label='Werkelijke populatie', color='blue')
 sns.lineplot(data=data_gevuld, x='Perioden', y='Population_Predicted', ax=ax6, label='Voorspelde Populatie', color='red')
+
+# Voeg titel en labels toe
 ax6.set_title('Werkelijke tegen voorspelde Populatie over de tijd')
 ax6.set_xlabel('Jaar')
 ax6.set_ylabel('Populatie')
+
+# Plot de zesde plot
 st.pyplot(fig6)
+
+# Knik uitleggen
+st.write("Er lijkt een knik in het model te zitten voor het jaar 2020. Waarom is dit? Dit hebben wij verder onderzocht aan de hand van de volgende grafiek.")
+
+# Maak de zevende plot van het totaal aantal banen
+fig7, ax7 = plt.subplots()
+sns.barplot(data=data_gevuld, x='Perioden', y='TotaalBanen_111', ax=ax7)
+
+# Voeg titel en labels toe
+ax6.set_title('Totaal aantal banen per jaar')
+ax6.set_xlabel('Jaar')
+ax6.set_ylabel('Totaal aantal banen')
+
+# Plot de zevende plot
+st.pyplot(fig7)
 
 # Toon de R-squared waarde
 r_squared = model.score(X, y)
