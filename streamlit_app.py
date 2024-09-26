@@ -214,4 +214,7 @@ st.pyplot(fig6)
 
 # Show R-squared value
 r_squared = model.score(X, y)
-st.write(f"R-squared: {r_squared:.4f}")
+st.write(f"R-squared: {r_squared:.4f}, dit is het voorspellend vermogen van het model. Dit percentage van de variantie wordt opgevangen door het model. Het aantal banen lijkt dus een goede voorspeller te zijn voor het bepalen van de totale populatie van Amsterdam.")
+st.write('Het bepalen van de totale populatie kan dus gedaan worden met het aantal banen. Maar er zullen ook nog mogelijk andere variabelen zijn die hier invloed op kunnen hebben. Hier kan nog verder onderzoek naar gedaan worden. En er kan dan mogelijk een nieuw model opgesteld worden, die mogelijk beter de populatie kan voorspelen.')
+st.write('Aan de hand van het vinden en toevoegen van extra variabelen kan er ook bepaald worden waarin juist naar gekeken kan of moet worden om eventueel invloed te hebben op de totale populatie van Amsterdam.')
+st.write('Op deze manier kan door Amsterdam bepaald worden of zijn groter of juist niet willen worden, om zo eventueel problemen zoals de woningcrisis te kunnen voorkomen of voor te zijn.')
