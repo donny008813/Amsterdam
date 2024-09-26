@@ -210,13 +210,26 @@ intercept = model.intercept_
 # Toon de vergelijking
 st.write(f"Regressie vergelijking: Populatie = {coefficients[0]:.2f} * Totaal aantal banen + {intercept:.2f}, dit is de vergelijking die het model geeft")
 st.write("Als het aantal banen groter wordt zal het aantal inwoners met 750 toenemen per 1000 banen.")
-st.write("Hieronder is de grafiek te zien waarin de werkelijke populatie getoond wordt en de voorspelde populatie aan de hand van het model.")
+st.write("Hieronder is de grafiek te zien waarin de werkelijke populatie getoond wordt en de voorspelde populatie aan de hand van het model. En de grafiek van de werkelijke waarde en de lijn voor de voorspelde waarde van het model tegenover de tijd.")
 
 # Voorspel de waardes
 y_pred = model.predict(X)
 
 # Voeg waardes toe om te kunnen plotten
 data_gevuld['Population_Predicted'] = y_pred
+
+# Plot voor de werkelijke en voorspelde populatie tegenover elkaar
+fig8, ax8 = plt.subplots()
+sns.scatterplot(data=data_gevuld, x='TotaalBanen_111', y='TotaleBevolking_1', ax=ax8, label='Werkelijke populatie', color='blue')
+sns.lineplot(data=data_gevuld, x='TotaalBanen_111', y='Population_Predicted', ax=ax8, label='Voorspelde populatie', color='red')
+
+# Voeg titel en labels toe
+ax8.set_title('Totaal aantal banen tegenover werkelijke en voorspelde populatie')
+ax8.set_xlabel('Total aantal banen (x1000)')
+ax8.set_ylabel('Populatie')
+
+# Plot de achtste plot
+st.pyplot(fig8)
 
 # Plot de voorspelde waarden tegenover de werkelijke waarden
 fig6, ax6 = plt.subplots()
@@ -254,6 +267,6 @@ st.write("In 2020 neemt het totaal aantal banen niet toe, zoals in de jaren ervo
 # Toon de R-squared waarde
 r_squared = model.score(X, y)
 st.write(f"R-squared: {r_squared:.4f}, dit is het voorspellend vermogen van het model. Dit percentage van de variantie wordt opgevangen door het model. Het aantal banen lijkt dus een goede voorspeller te zijn voor het bepalen van de totale populatie van Amsterdam.")
-st.write('Het bepalen van de totale populatie kan dus gedaan worden met het aantal banen. Maar er zullen ook nog mogelijk andere variabelen zijn die hier invloed op kunnen hebben. Hier kan nog verder onderzoek naar gedaan worden. En er kan dan mogelijk een nieuw model opgesteld worden, die mogelijk beter de populatie kan voorspelen.')
+st.write('Het bepalen van de totale populatie kan dus gedaan worden met het aantal banen. Maar er zullen ook nog mogelijk andere variabelen zijn die hier invloed op kunnen hebben. Hier kan nog verder onderzoek naar gedaan worden. Er kan dan mogelijk een nieuw model opgesteld worden, die mogelijk beter de populatie kan voorspelen.')
 st.write('Aan de hand van het vinden en toevoegen van extra variabelen kan er ook bepaald worden waarin juist naar gekeken kan of moet worden om eventueel invloed te hebben op de totale populatie van Amsterdam.')
-st.write('Op deze manier kan door Amsterdam bepaald worden of zijn groter of juist niet willen worden, om zo eventueel problemen zoals de woningcrisis te kunnen voorkomen of voor te zijn.')
+st.write('Op deze manier kan door Amsterdam bepaald worden of zij groter of juist niet willen worden, om zo eventueel problemen zoals de woningcrisis te kunnen voorkomen of voor te zijn.')
