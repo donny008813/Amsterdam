@@ -139,5 +139,9 @@ ax3.set_title('Amsterdam Net Migration Over Time')
 ax3.set_ylabel('Net Migration (Immigration - Emigration)')
 ax3.set_xlabel('Year')
 
+
+# Rotate the x-ticks for better readability
+plt.xticks(rotation=90)  # Adjust the rotation angle as needed
+
 # Show the third plot in the Streamlit app
 st.pyplot(fig3)
