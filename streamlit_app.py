@@ -24,7 +24,7 @@ data = load_data()
 # Titel en inleidende tekst voor de app
 st.title("Voorspellen van de populatie van Amsterdam")
 st.write("De woningcrisis is een actueel probleem. Alleen om erachter te komen hoeveel woningen er nodig zijn in Amsterdam, moet er een beeld zijn hoeveel inwoners erbij zullen komen en er weggaan.")
-st.write("Er zijn nog meer problemen te bedenken die voort komen uit de toename van de populatie. Is dit aantal te beinvloeden? Hier zal naar gekeken worden'.)
+st.write("Er zijn nog meer problemen te bedenken die voort komen uit de toename van de populatie. Is dit aantal te beinvloeden? Hier zal naar gekeken worden.")
 st.write("Eerst zal er worden gekeken naar de totale populatie van Amsterdam en verdeeld over mannen en vrouwen. Daarna naar hoeveel er bij zijn gekomen en hoeveel er weg zijn gegaan.")
 st.write("Daarna zal er gekeken worden of er aan de hand van andere gegevens over de jaren heen een lineair regressie model opgesteld kan worden waarmee de populatie voorspeld zou kunnen worden.")
 st.write("De gekozen variabelen worden verklaard en het model zal worden getoond.")
