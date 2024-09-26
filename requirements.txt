@@ -4,4 +4,4 @@ seaborn
 numpy
 cbsodata
 matplotlib
-sklearn
+scikit-learn
