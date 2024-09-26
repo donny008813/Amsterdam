@@ -144,7 +144,7 @@ ax3.set_ylabel('Aantal mensen')
 ax3.set_xlabel('Jaar')
 
 # x-as draaien
-plt.xticks(rotation=90)  # Adjust the rotation angle as needed
+plt.xticks(fontsize=10, rotation=90)
 
 # Plot de derde plot
 st.pyplot(fig3)
