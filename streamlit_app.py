@@ -101,3 +101,37 @@ plt.xticks(fontsize=10, rotation=45)
 
 # Show the second plot in the Streamlit app
 st.pyplot(fig2)
+
+# Derde grafiek
+st.subheader('Net inkomend populatie Amsterdam')
+
+# Calculate inkomend
+data['inkomend'] = data['VestigingUitAndereGemeente_69'] + data['Immigratie_74] + data['LevendGeborenKinderen_58']
+
+# Calculate uitgaand
+data['uitgaand'] = data['VertrekNaarAndereGemeente_70'] + data['Emigratie_75] + data['Overledenen_60']
+
+# Calculate net populatie
+data['net populatie'] = data['inkomend'] - data['uitgaand']
+
+# Slider maken voor de net grafiek
+min_year = int(data['Perioden'].min())
+max_year = int(data['Perioden'].max())
+year_range = st.slider('Select year range for net inkomende populatie', min_year, max_year, (min_year, max_year))
+
+# Data selecter op basis van de slider
+data_slider = data[(data['Perioden'] >= year_range[0]) & (data['Perioden'] <= year_range[1])]
+
+# Plot maken voor net grafiek
+fig3, ax3 = plt.subplots()
+
+# Plot de net grafiek als barplot
+sns.barplot(data=data_slider, x='Perioden', y='net populatie', ax=ax3)
+
+# Add title and labels
+ax3.set_title('Amsterdam Net Migration Over Time')
+ax3.set_ylabel('Net Migration (Immigration - Emigration)')
+ax3.set_xlabel('Year')
+
+# Show the third plot in the Streamlit app
+st.pyplot(fig3)
