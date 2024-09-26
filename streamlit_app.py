@@ -99,6 +99,9 @@ ax2.set_xlabel('Year')
 # Modify x-axis ticks: rotate and set font size
 plt.xticks(fontsize=10, rotation=45)
 
+# Show only every 2nd x-axis tick
+ax2.set_xticks(data['Perioden'][::2])
+
 # Show the second plot in the Streamlit app
 st.pyplot(fig2)
 
@@ -135,6 +138,9 @@ sns.barplot(data=data_slider, x='Perioden', y='net populatie', ax=ax3)
 ax3.set_title('Amsterdam Net Migration Over Time')
 ax3.set_ylabel('Net Migration (Immigration - Emigration)')
 ax3.set_xlabel('Year')
+
+# Show only every 2nd x-axis tick
+ax3.set_xticks(data['Perioden'][::2])
 
 # Show the third plot in the Streamlit app
 st.pyplot(fig3)
