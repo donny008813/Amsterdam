@@ -51,11 +51,8 @@ ax1.set_xlabel('Year')
 # Set y-axis limit to include 0
 ax1.set_ylim(0, data['TotaleBevolking_1'].max() + 50000)
 
-# Show only every 2nd x-axis tick
-ax1.set_xticks(data['Perioden'][::2])
-
-# Modify x-axis ticks: rotate and set font size
-plt.xticks(fontsize=10, rotation=45)
+# Rotate the x-ticks for better readability
+plt.xticks(rotation=90)  # Adjust the rotation angle as needed
 
 # Show the first plot in the Streamlit app
 st.pyplot(fig1)
