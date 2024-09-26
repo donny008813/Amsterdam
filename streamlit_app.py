@@ -249,7 +249,7 @@ plt.xticks(fontsize=10, rotation=90)
 # Plot de zevende plot
 st.pyplot(fig7)
 
-st.write('In 2020 neemt het totaal aantal banen niet toe, zoals in de jaren ervoor en erna. Dit heeft mogelijk met Covid-19 te maken gehad. Maar dit heeft dus zoals te zien in de grafiek van het model wel invloed op het model zelf.")
+st.write("In 2020 neemt het totaal aantal banen niet toe, zoals in de jaren ervoor en erna. Dit heeft mogelijk met Covid-19 te maken gehad. Maar dit heeft dus zoals te zien in de grafiek van het model wel invloed op het model zelf.")
 
 # Toon de R-squared waarde
 r_squared = model.score(X, y)
