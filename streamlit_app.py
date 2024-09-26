@@ -19,8 +19,7 @@ print(data.head(20))
 
 # Title for the app
 st.title("Populatie van Amsterdam en hoe te voorspellen.")
-st.write("De woningcrisis is een actueel probleem. Alleen om erachter te komen hoeveel woningen er nodig zijn in Amsterdam, moet er een 
-         beeld zijn hoeveel inwoners erbij zullen komen en er weggaan.")
+st.write("De woningcrisis is een actueel probleem. Alleen om erachter te komen hoeveel woningen er nodig zijn in Amsterdam, moet er een beeld zijn hoeveel inwoners erbij zullen komen en er weggaan.")
 
 # First scatter plot: Population
 st.subheader("Population Data")
