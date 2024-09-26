@@ -194,7 +194,7 @@ coefficients = model.coef_
 intercept = model.intercept_
 
 # Display the regression equation
-st.write(f"Regression Equation: Population = {coefficients[0]:.2f} * Total Jobs + {coefficients[1]:.2f} * Joblessness + {intercept:.2f}")
+st.write(f"Regression Equation: Population = {coefficients[0]:.2f} * Total Jobs + {intercept:.2f}")
 
 # Predict population values using the model
 y_pred = model.predict(X)
