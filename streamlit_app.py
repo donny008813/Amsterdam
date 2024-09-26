@@ -120,7 +120,7 @@ max_year = int(data['Perioden'].max())
 year_range = st.slider('Select year range for net inkomende populatie', min_year, max_year, (min_year, max_year))
 
 # Data selecter op basis van de slider
-data_slider = data[(data['Perioden'] >= year_range[0]) & (data['Perioden'] <= year_range[1])]
+data_slider = data[(int(data['Perioden']) >= year_range[0]) & (int(data['Perioden']) <= year_range[1])]
 
 # Plot maken voor net grafiek
 fig3, ax3 = plt.subplots()
