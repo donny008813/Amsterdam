@@ -106,10 +106,10 @@ st.pyplot(fig2)
 st.subheader('Net inkomend populatie Amsterdam')
 
 # Calculate inkomend
-data['inkomend'] = data['VestigingUitAndereGemeente_69'] + data['Immigratie_74] + data['LevendGeborenKinderen_58']
+data['inkomend'] = data['VestigingUitAndereGemeente_69'] + data['Immigratie_74'] + data['LevendGeborenKinderen_58']
 
 # Calculate uitgaand
-data['uitgaand'] = data['VertrekNaarAndereGemeente_70'] + data['Emigratie_75] + data['Overledenen_60']
+data['uitgaand'] = data['VertrekNaarAndereGemeente_70'] + data['Emigratie_75'] + data['Overledenen_60']
 
 # Calculate net populatie
 data['net populatie'] = data['inkomend'] - data['uitgaand']
